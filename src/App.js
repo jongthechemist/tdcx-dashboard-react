@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { RouterProvider } from './router/_index'
+import { ReduxProvider } from './redux/_index'
+import { setBaseURL } from './services/_index'
+import { env } from './helpers/env'
+import { Switch, Route } from 'react-router'
+import { LoginView } from './views/LoginView'
+import { DashboardView } from './views/DashboardView'
+import { ProtectedView, ViewBase } from './views/ViewBase'
+
+setBaseURL(env.REACT_APP_API_URL)
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ReduxProvider>
+      <RouterProvider>
+        <Switch>
+          <Route path={'/dashboard'} component={ViewBase(ProtectedView(DashboardView))} />
+          <Route path={'/'} component={ViewBase(LoginView)} />
+        </Switch>
+      </RouterProvider>
+    </ReduxProvider>
+  )
 }
 
-export default App;
+export default App
