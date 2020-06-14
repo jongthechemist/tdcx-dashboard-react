@@ -20,13 +20,3 @@ export const useStatePath = (path, defaultValue, equalityFn = undefined) => {
   const selector = useSelector((state) => get(state, path, defaultValue), equalityFn)
   return selector
 }
-
-export const useInputDispatch = (path, action) => {
-  const value = useSelector((state) => get(state, path, ''))
-  const dispatchAction = useDispatchAction(action)
-  const onChange = (event) => {
-    const newValue = event.target.value
-    dispatchAction(newValue)
-  }
-  return [value, onChange]
-}
