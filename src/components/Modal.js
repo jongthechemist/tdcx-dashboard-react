@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Modal as ModalBase, ModalHeader, ModalBody } from 'reactstrap'
 
 export const Modal = ({ isOpen, header, toggle, children }) => {
@@ -8,4 +9,10 @@ export const Modal = ({ isOpen, header, toggle, children }) => {
       <ModalBody>{children}</ModalBody>
     </ModalBase>
   )
+}
+Modal.propTypes = {
+  isOpen: PropTypes.bool,
+  header: PropTypes.node,
+  toggle: PropTypes.func,
+  children: PropTypes.node
 }

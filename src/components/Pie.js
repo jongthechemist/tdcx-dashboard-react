@@ -1,5 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { ResponsivePie } from '@nivo/pie'
+import { useAccent } from '../helpers/hooks'
+
+export const getColor = (accent) => (args) => {
+  if (args?.id === 'completed' || args?.data?.id === 'completed') return accent
+  return 'transparent'
+}
 
 export const Pie = ({ count, total }) => {
   const data = React.useMemo(
@@ -9,6 +16,7 @@ export const Pie = ({ count, total }) => {
     ],
     [count, total]
   )
+  const accent = useAccent()
   return (
     <ResponsivePie
       data={data}
@@ -18,25 +26,16 @@ export const Pie = ({ count, total }) => {
         right: 20,
         left: 20
       }}
-      colors={['#5285EC', '#E8ECEC']}
-      radialLabel={({ id, label }) => {
-        if (id === 'completed')
-          return (
-            <>
-              <tspan x={0}>Completed</tspan>
-              <tspan x={0} dy={12}>
-                Tasks
-              </tspan>
-            </>
-          )
-      }}
+      colors={[accent, '#E8ECEC']}
+      radialLabel={'label'}
       radialLabelsLinkHorizontalLength={0}
-      radialLabelsTextColor={'#5285EC'}
-      radialLabelsLinkColor={({ data }) => {
-        if (data.id === 'completed') return '#5285EC'
-        return 'transparent'
-      }}
+      radialLabelsTextColor={getColor(accent)}
+      radialLabelsLinkColor={getColor(accent)}
       enableSlicesLabels={false}
     />
   )
+}
+Pie.propTypes = {
+  count: PropTypes.number,
+  total: PropTypes.number
 }

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Modal } from './Modal'
 import { Input } from './Input'
 import { Button } from './Button'
@@ -35,4 +36,13 @@ export const TaskModal = ({
       </div>
     </Modal>
   )
+}
+TaskModal.propTypes = {
+  isOpen: PropTypes.bool,
+  header: PropTypes.node,
+  defaultValue: PropTypes.string,
+  submitText: PropTypes.string,
+  disabled: PropTypes.bool,
+  onSubmit: PropTypes.func,
+  toggle: PropTypes.func
 }

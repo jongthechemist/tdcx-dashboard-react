@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Heading } from './Heading'
 
@@ -21,7 +22,7 @@ const ProfileImg = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #5285ec;
+  background-color: ${(props) => props?.theme?.accent};
 `
 
 export const TopBar = ({ userName, userImg, children }) => {
@@ -36,4 +37,9 @@ export const TopBar = ({ userName, userImg, children }) => {
       </div>
     </TopBarContainer>
   )
+}
+TopBar.propTypes = {
+  userName: PropTypes.string,
+  userImg: PropTypes.string,
+  children: PropTypes.node
 }
