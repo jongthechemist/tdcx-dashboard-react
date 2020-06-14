@@ -32,7 +32,7 @@ export const DashboardSummaryView = () => {
             {() => (
               <>
                 <Heading>Tasks Completed</Heading>
-                <Counter count={tasksCompleted} total={totalTasks}/>
+                <Counter count={tasksCompleted} total={totalTasks} />
               </>
             )}
           </Skeleton>
